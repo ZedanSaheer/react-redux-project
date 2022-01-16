@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { login } from '../features/user';
+import { login, logout } from '../features/user';
 
 const Login = () => {
 
     const dispatch = useDispatch();
+    const [hide, setHide] = useState(true);
 
     return (
         <div>
-            <button onClick={() => {
+           {hide ?  (<button onClick={() => {
                 dispatch(login({
                     name: "Zedan Saheer", age: 21, email: "zed.saheer5@gmail.com"
                 }));
-            }}>Login</button>
+                setHide(false);
+            }}>Login</button>) :
+            (<button onClick={() => {
+                dispatch(logout());
+                setHide(true);
+            }}>Logout</button>)}
         </div>
     )
 }
